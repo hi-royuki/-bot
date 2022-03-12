@@ -1,5 +1,15 @@
-
-
+def wareki_command(command):
+    wareki, year_str = command.split() # 文字列を空白で分割する。
+    year = int(year_str) # 文字列を数値に変換
+    if year >= 2019:
+        reiwa = year - 2018
+        response = f'西暦{year}年ハ、令和{reiwa}年です。'
+    elif year >= 1989:
+        heisei = year - 1988
+        response = f'西暦{year}年ハ、平成{heisei}年です。'
+    else:
+        response = f'西暦{year}年ハ、平成より前です'
+    return response # 結果を返す
 
 
 command_file = open('pybot.txt', encoding='utf-8')
@@ -29,17 +39,17 @@ while True: # 常に条件を満たす
 
     #　年号の計算をする和暦コマンドを作成
     if '和暦' in command: # 和暦が含まれている場合
-        wareki, year_str = command.split() # 文字列を空白で分割する。
-        year = int(year_str) # 文字列を数値に変換
-        if year >= 2019: # 令和の範囲か
-            reiwa = year - 2018
-            response = f'西暦{year}年ハ、令和{reiwa}年です。'
-        elif year >= 1989:
-            heisei = year - 1988
-            response = f'西暦{year}年ハ、平成{heisei}年です。'
-        else:
-            response = f'西暦{year}年ハ、平成より前です'
-
+        response = wareki_command(command)
+        # year = int(year_str)
+        # if year >= 2019: # 令和の範囲か
+        #     reiwa = year - 2018
+        #     response = f'西暦{year}年ハ、令和{reiwa}年です。'
+        # elif year >= 1989:
+        #     heisei = year - 1988
+        #     response = f'西暦{year}年ハ、平成{heisei}年です。'
+        # else:
+        #     response = f'西暦{year}年ハ、平成より前です'
+        #
 
 
     if not response:

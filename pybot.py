@@ -1,3 +1,7 @@
+
+
+
+
 command_file = open('pybot.txt', encoding='utf-8')
 raw_data = command_file.read()
 command_file.close()

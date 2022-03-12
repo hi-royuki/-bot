@@ -1,3 +1,9 @@
+def len_command(command):
+    cmd, text = command.split()
+    length = len(text)
+    response = f'文字列ノ長サハ {length} 文字デス。'
+    return response
+
 def wareki_command(command):
     wareki, year_str = command.split() # 文字列を空白で分割する。
     year = int(year_str) # 文字列を数値に変換
@@ -10,6 +16,7 @@ def wareki_command(command):
     else:
         response = f'西暦{year}年ハ、平成より前です'
     return response # 結果を返す
+
 
 
 command_file = open('pybot.txt', encoding='utf-8')
@@ -40,6 +47,10 @@ while True: # 常に条件を満たす
     #　年号の計算をする和暦コマンドを作成
     if '和暦' in command: # 和暦が含まれている場合
         response = wareki_command(command)
+    # 長さを取得するコマンドを作成
+    if '長さ' in command:
+        response = len_command(command)
+
         # year = int(year_str)
         # if year >= 2019: # 令和の範囲か
         #     reiwa = year - 2018

@@ -12,12 +12,6 @@ for line in lines:
     bot_dict[key] = response # 辞書データに値を追加
 
 
-# 挨拶の辞書データを定義する。
-# bot_dict = {
-#     'こんにちは': 'コンニチハ',
-#     'ありがとう': 'アリガトウ',
-#     'さようなら': 'サヨウナラ',
-# }
 
 while True: # 常に条件を満たす
 # input関数でユーザーからの入力を受付、入力された値をcommand変数に保存
@@ -29,40 +23,24 @@ while True: # 常に条件を満たす
             response = bot_dict[message]
             break
 
+    #　年号の計算をする和暦コマンドを作成
+    if '和暦' in command: # 和暦が含まれている場合
+        wareki, year_str = command.split() # 文字列を空白で分割する。
+        year = int(year_str) # 文字列を数値に変換
+        if year >= 2019: # 令和の範囲か
+            reiwa = year - 2018
+            response = f'西暦{year}年ハ、令和{reiwa}年です。'
+        elif year >= 1989:
+            heisei = year - 1988
+            response = f'西暦{year}年ハ、平成{heisei}年です。'
+        else:
+            response = f'西暦{year}年ハ、平成より前です'
+
+
+
     if not response:
         response = '何ヲ言ッテイルカ、ワカラナイ'
     print(response)
 
     if 'さようなら' in command:
         break
-
-# while True:
-#     command = input('pybot> ')
-#     response = ''
-#     for message in bot_dict:
-#         if message in command:
-#             response = bot_dict[message]
-#             break
-#
-#     if not response:
-#         response = '何を言っているかわからない'
-#     print(response)
-#
-#     if 'さようなら' in command:
-#         break
-
-#
-# while True:
-#     command = input('pybot> ')
-#     response = ''
-#     for message in bot_dict:
-#         if message in command:
-#             response = bot_dict[message]
-#             break
-#
-#     if not response:
-#         response = '何ヲ言ッテルカ、ワカラナイ'
-#     print(response)
-#
-#     if 'さようなら' in command:
-#         break

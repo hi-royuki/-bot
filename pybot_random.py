@@ -2,7 +2,7 @@ import random
 
 def choice_command(command):
     data = command.split()
-    choiced = random.choice(data)
+    choiced = random.choice(data[1:]) # [1:]でリストの１番目行こうを渡す
     response = f'「{choiced}」ガ選バラマシタ。'
     return response
 

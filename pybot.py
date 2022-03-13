@@ -1,3 +1,5 @@
+from pybot_eto import eto_command
+
 def len_command(command):
     cmd, text = command.split()
     length = len(text)
@@ -50,6 +52,9 @@ while True: # 常に条件を満たす
     # 長さを取得するコマンドを作成
     if '長さ' in command:
         response = len_command(command)
+    # 干支コマンドを作成
+    if '干支' in command:
+        response = eto_command(command)
 
         # year = int(year_str)
         # if year >= 2019: # 令和の範囲か

@@ -1,5 +1,5 @@
 from pybot_eto import eto_command
-
+from pybot_random import choice_command, dice_command
 def len_command(command):
     cmd, text = command.split()
     length = len(text)
@@ -55,6 +55,12 @@ while True: # 常に条件を満たす
     # 干支コマンドを作成
     if '干支' in command:
         response = eto_command(command)
+    # 選ぶコマンドを作成
+    if '選ぶ' in command:
+        response = choice_command(command)
+    # さいころコマンドを作成
+    if 'さいころ' in command:
+        response = dice_command()
 
         # year = int(year_str)
         # if year >= 2019: # 令和の範囲か

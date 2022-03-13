@@ -14,16 +14,18 @@ def now_command():
 
 # 日付を作成
 def weekday_command(command):
-    data = command.split()
-    year = int(data[1])
-    month = int(data[2])
-    day = int(data[3])
-    one_day = date(year, month, day)
-
+    try:
+        data = command.split()
+        year = int(data[1])
+        month = int(data[2])
+        day = int(data[3])
+        one_day = date(year, month, day)
 # 曜日の文字列
-    weekday_str = '月火水木金土日'
-    weekday = weekday_str[one_day.weekday()]
-
-
-    response = f'{one_day} は {weekday}曜日です'
+        weekday_str = '月火水木金土日'
+        weekday = weekday_str[one_day.weekday()]
+        response = f'{one_day} は {weekday}曜日です'
+    except IndexError:
+        response = '3つの値(年月日)を指定してください'
+    except ValueError:
+        response = '正しい日付を指定してください'
     return response

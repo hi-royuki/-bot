@@ -10,7 +10,8 @@ def len_command(command):
 
 def wareki_command(command):
     wareki, year_str = command.split() # 文字列を空白で分割する。
-    try:       # tryを追加し、int()関数の処理からresponseを返す前までにtry節にする
+    # try:       # tryを追加し、int()関数の処理からresponseを返す前までにtry節にする
+    if year_str.isdigit(): # 数値に変換可能か確認
         year = int(year_str) # 文字列を数値に変換
         if year >= 2019:
             reiwa = year - 2018
@@ -20,8 +21,9 @@ def wareki_command(command):
             response = f'西暦{year}年ハ、平成{heisei}年です。'
         else:
             response = f'西暦{year}年ハ、平成より前です'
-    except ValueError:
-            response = '数値を指定してください'
+    # except ValueError:
+    else:
+        response = '数値を指定してください'
     return response # 結果を返す
 
 
@@ -46,52 +48,57 @@ while True: # 常に条件を満たす
     command = input('pybot> ')
     # print(command)
     response = '' #空文字列で初期化する
-    for message in bot_dict:
-        if message in command:
-            response = bot_dict[message]
+    try:
+        for message in bot_dict:
+            if message in command:
+                response = bot_dict[message]
+                break
+
+        #　年号の計算をする和暦コマンドを作成
+        if '和暦' in command: # 和暦が含まれている場合
+            response = wareki_command(command)
+        # 長さを取得するコマンドを作成
+        if '長さ' in command:
+            response = len_command(command)
+        # 干支コマンドを作成
+        if '干支' in command:
+            response = eto_command(command)
+        # 選ぶコマンドを作成
+        if '選ぶ' in command:
+            response = choice_command(command)
+        # さいころコマンドを作成
+        if 'さいころ' in command:
+            response = dice_command()
+        # 今日の日付コマンドの作成
+        if '今日' in command:
+            response = today_command()
+        # 現在日時のコマンド作成
+        if '現在' in command:
+            response = now_command()
+        # 曜日コマンド作成
+        if '曜日' in command:
+            response = weekday_command(command)
+
+
+            # year = int(year_str)
+            # if year >= 2019: # 令和の範囲か
+            #     reiwa = year - 2018
+            #     response = f'西暦{year}年ハ、令和{reiwa}年です。'
+            # elif year >= 1989:
+            #     heisei = year - 1988
+            #     response = f'西暦{year}年ハ、平成{heisei}年です。'
+            # else:
+            #     response = f'西暦{year}年ハ、平成より前です'
+            #
+
+
+        if not response:
+            response = '何ヲ言ッテイルカ、ワカラナイ'
+        print(response)
+
+        if 'さようなら' in command:
             break
-
-    #　年号の計算をする和暦コマンドを作成
-    if '和暦' in command: # 和暦が含まれている場合
-        response = wareki_command(command)
-    # 長さを取得するコマンドを作成
-    if '長さ' in command:
-        response = len_command(command)
-    # 干支コマンドを作成
-    if '干支' in command:
-        response = eto_command(command)
-    # 選ぶコマンドを作成
-    if '選ぶ' in command:
-        response = choice_command(command)
-    # さいころコマンドを作成
-    if 'さいころ' in command:
-        response = dice_command()
-    # 今日の日付コマンドの作成
-    if '今日' in command:
-        response = today_command()
-    # 現在日時のコマンド作成
-    if '現在' in command:
-        response = now_command()
-    # 曜日コマンド作成
-    if '曜日' in command:
-        response = weekday_command(command)
-
-
-        # year = int(year_str)
-        # if year >= 2019: # 令和の範囲か
-        #     reiwa = year - 2018
-        #     response = f'西暦{year}年ハ、令和{reiwa}年です。'
-        # elif year >= 1989:
-        #     heisei = year - 1988
-        #     response = f'西暦{year}年ハ、平成{heisei}年です。'
-        # else:
-        #     response = f'西暦{year}年ハ、平成より前です'
-        #
-
-
-    if not response:
-        response = '何ヲ言ッテイルカ、ワカラナイ'
-    print(response)
-
-    if 'さようなら' in command:
-        break
+    except Exception as e:
+        print('予期せぬエラーが発生しました')
+        print(f'* 種類: {type(e)}')
+        print(f'* 内容; {e}')

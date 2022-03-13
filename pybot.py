@@ -20,7 +20,7 @@ def wareki_command(command):
             response = f'西暦{year}年ハ、平成{heisei}年です。'
         else:
             response = f'西暦{year}年ハ、平成より前です'
-        except ValueError:
+    except ValueError:
             response = '数値を指定してください'
     return response # 結果を返す
 

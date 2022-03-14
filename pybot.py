@@ -2,6 +2,7 @@ from pybot_eto import eto_command
 from pybot_random import choice_command, dice_command
 from pybot_datetime import today_command, now_command, weekday_command
 from pybot_event import event_command
+from pybot_wikipedia import wikipedia_command
 
 def len_command(command):
     cmd, text = command.split()
@@ -82,6 +83,9 @@ while True: # 常に条件を満たす
         # イベント検索コマンド作成
         if 'イベント' in command:
             response = event_command(command)
+        #事典コマンド作成
+        if '事典' in command:
+            response = wikipedia_command(command)
             # year = int(year_str)
             # if year >= 2019: # 令和の範囲か
             #     reiwa = year - 2018

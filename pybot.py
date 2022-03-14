@@ -1,6 +1,7 @@
 from pybot_eto import eto_command
 from pybot_random import choice_command, dice_command
 from pybot_datetime import today_command, now_command, weekday_command
+from pybot_event import event_command
 
 def len_command(command):
     cmd, text = command.split()
@@ -78,8 +79,9 @@ while True: # 常に条件を満たす
         # 曜日コマンド作成
         if '曜日' in command:
             response = weekday_command(command)
-
-
+        # イベント検索コマンド作成
+        if 'イベント' in command:
+            response = event_command(command)
             # year = int(year_str)
             # if year >= 2019: # 令和の範囲か
             #     reiwa = year - 2018
